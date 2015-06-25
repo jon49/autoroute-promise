@@ -1,0 +1,35 @@
+{
+  "name": "autoroute-express-promise",
+  "version": "0.0.0",
+  "description": "autoroute for use with promises",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jon49/autoroute-promise.git"
+  },
+  "keywords": [
+    "autoroute",
+    "auto-route",
+    "routing",
+    "route",
+    "controller",
+    "promise",
+    "express"
+  ],
+  "author": {
+    "name": "Jon Nyman",
+    "email": "nymanjon@gmail.com"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jon49/autoroute-promise/issues"
+  },
+  "homepage": "https://github.com/jon49/autoroute-promise",
+  "dependencies": {
+    "autoroute-base": "0.0.2",
+    "lodash": "^3.9.3"
+  }
+}

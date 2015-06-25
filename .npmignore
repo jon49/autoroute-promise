@@ -1,0 +1,5 @@
+﻿tests
+typings
+*.ts
+*.map
+bin/package-version-sync.js
