@@ -3,7 +3,7 @@
 import {createAutoRoute, method as method_} from 'autoroute-base'
 import _ = require('lodash')
 
-const toControllers = _.curry(({message, baseRoute, sendWrapper, routeName}: AutoRouteExpressPromise.ToControllersOptions, controllerMethod: AutoRouteExpressPromise.ControllerMethod) => {
+const toControllers = _.curry(({message, baseRoute, response, routeName}: AutoRouteExpressPromise.ToControllersOptions, controllerMethod: AutoRouteExpressPromise.ControllerMethod) => {
 
     const [routeMethodIndex, baseController] = controllerMethod,
           methodName = method_[routeMethodIndex], // named route method
@@ -12,9 +12,9 @@ const toControllers = _.curry(({message, baseRoute, sendWrapper, routeName}: Aut
     // Wrap base controller in express style callback.
     baseRoute[methodName]((request: any, client: any, error: any) => {
 
-        message.call(messageInfo, messageInfo)
+        if (message) message.call(messageInfo, messageInfo)
 
-        var send = <any> _.compose(client.send.bind(client), sendWrapper)
+        const send = <any> _.partial(response, client)
 
         baseController(request).then(send).catch(error).done()
     })

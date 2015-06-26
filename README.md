@@ -14,7 +14,7 @@ npm install --save autoroute-express-promise
 
 ## [Project Status](http://www.walkercoderanger.com/blog/2015/06/advice-for-open-source-projects/)
 
-- Stable/Release
+- Beta
 - Active (June 26, 2015)
 
 ## Example
@@ -33,7 +33,7 @@ var authenticatedRoute = route => router.route(route).all(isUserAuthenticated)
 
 routes({
         baseRoute: authenticatedRoute,
-        sendWrapper: withMessageAs,
+        response: (response, result) => response.send(withMessageAs(result)),
         message: (o) => {console.log(o.routeName, o.methodName)}
     }, ['./controllers/**/index.js'])
 
@@ -137,7 +137,7 @@ where `options`:
 {
     baseRoute: (routeName: string) => any
     message?: (options: {routeName: string; methodName: string}) => void
-    sendWrapper?: (result: any) => any
+    response: (client: Express.Response, result: any) => any
 }
 ```
 
@@ -158,14 +158,12 @@ o => {console.log(o.routeName, o.methodName)}
 
 where: `o` is `{routeName: '/api/myroute/:id', methodName: 'get'}`.
 
-**sendWrapper**: (Optional) Used to wrap the result in some wrapper, e.g.,
+**response**: (Required) Used to wrap the result in some wrapper and send
+method, e.g.,
 
 ```js
-result => {result: result}
+(client, result) => client.send({result: result})
 ```
-
-So, when sending with `Express.js` `response.send(sendWrapper(result))` will
-respond with `{result: result}`.
 
 where `glob`:
 

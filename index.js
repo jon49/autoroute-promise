@@ -2,12 +2,13 @@
 var autoroute_base_1 = require('autoroute-base');
 var _ = require('lodash');
 var toControllers = _.curry(function (_a, controllerMethod) {
-    var message = _a.message, baseRoute = _a.baseRoute, sendWrapper = _a.sendWrapper, routeName = _a.routeName;
+    var message = _a.message, baseRoute = _a.baseRoute, response = _a.response, routeName = _a.routeName;
     var routeMethodIndex = controllerMethod[0], baseController = controllerMethod[1], methodName = autoroute_base_1.method[routeMethodIndex], messageInfo = { routeName: routeName, methodName: methodName };
     // Wrap base controller in express style callback.
     baseRoute[methodName](function (request, client, error) {
-        message.call(messageInfo, messageInfo);
-        var send = _.compose(client.send.bind(client), sendWrapper);
+        if (message)
+            message.call(messageInfo, messageInfo);
+        var send = _.partial(response, client);
         baseController(request).then(send).catch(error).done();
     });
 });

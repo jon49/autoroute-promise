@@ -22,9 +22,9 @@ declare module AutoRouteExpressPromise {
     }
 
     interface Options {
-        message?: (options: {routeName: string; methodName: string}) => void
         baseRoute: (routeName: string) => any
-        sendWrapper?: (result: any) => any
+        response: (client: any, result: any) => any
+        message?: (options: {routeName: string; methodName: string}) => void
     }
 
     interface ToControllersOptions extends Options {
