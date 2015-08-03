@@ -71,15 +71,8 @@ const PETS = '/pets',
 var routes: AutoRouteExpressPromise.RouteDefinition = {
     route: PET,
     methods: [
-        [
-            method.get,
-            (req: Request) => getPet(req.params[ID])
-        ],
-        [
-            method.delete,
-            (req: Request) => petDied(req.params[ID])
-        ]
-    ]
+        [ method.get,           (req: Request) => getPet(req.params[ID]) ],
+        [ method.delete,        (req: Request) => petDied(req.params[ID]) ] ]
 }
 
 export = routes
@@ -99,28 +92,33 @@ var routes: AutoRouteExpressPromise.RouteDefinition[] = [
     {
         route: PETS,
         methods: [
-            [
-                method.post,
-                (req: Request) => getPet(req.body)
-            ]
-        ]
+            [ method.post,      (req: Request) => getPet(req.body) ] ]
     },
     {
         route: PET,
         methods: [
-            [
-                method.get,
-                (req: Request) => getPet(req.params[ID])
-            ],
-            [
-                method.delete,
-                (req: Request) => petDied(req.params[ID])
-            ]
-        ]
+            [ method.get,       (req: Request) => getPet(req.params[ID]) ],
+            [ method.delete,    (req: Request) => petDied(req.params[ID]) ] ]
     }
 ]
 
 export = routes
+```
+
+Cleaner nested route syntax (version 0.2+):
+
+```js
+var routes = {
+    '/pets': {
+        methods: [
+            [ method.post,          (req: Request) => getPet(req.body) ] ]
+        ':id': {
+            methods: [
+                [ method.get,       (req: Request) => getPet(req.params[ID]) ],
+                [ method.delete,    (req: Request) => petDied(req.params[ID]) ] ]
+        }
+    }
+}
 ```
 
 ## API
