@@ -1,6 +1,6 @@
 {
   "name": "autoroute-express-promise",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "description": "autoroute for use with promises",
   "main": "index.js",
   "scripts": {
@@ -30,6 +30,8 @@
   "homepage": "https://github.com/jon49/autoroute-promise",
   "dependencies": {
     "autoroute-base": "0.0.2",
-    "lodash": "^3.9.3"
+    "lodash": "^3.9.3",
+    "ramda": "^0.17.1",
+    "route-methods": "0.0.1"
   }
 }

@@ -1,6 +1,7 @@
 ﻿/// <reference path="typings/typings.d.ts" />
 
 import {createAutoRoute, method as method_} from 'autoroute-base'
+import {flattenRoute} from 'route-methods'
 import _ = require('lodash')
 
 const toControllers = _.curry(({message, baseRoute, response, routeName}: AutoRouteExpressPromise.ToControllersOptions, controllerMethod: AutoRouteExpressPromise.ControllerMethod) => {
@@ -22,6 +23,7 @@ const toControllers = _.curry(({message, baseRoute, response, routeName}: AutoRo
 })
 
 const createRoutes = _.curry((o: AutoRouteExpressPromise.Options, routeDefinitions: AutoRouteExpressPromise.RouteDefinition[]) => {
+    const flattenedRoutes = routeDefinitions.map(flattenRoute)
     _.forEach(routeDefinitions, routeDef => {
         const {route, methods} = routeDef,
               startRoute = o.baseRoute(route), // Get router

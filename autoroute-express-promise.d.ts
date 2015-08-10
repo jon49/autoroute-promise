@@ -1,6 +1,4 @@
-﻿declare var arep: AutoRouteExpressPromise.AutoRoute
-
-declare module AutoRouteExpressPromise {
+﻿declare module AutoRouteExpressPromise {
 
     type ControllerMethod = [AutoRouteBase.Method, (req: any) => Q.Promise<any>]
 
@@ -40,6 +38,8 @@ declare module AutoRouteExpressPromise {
         method: typeof AutoRouteBase.Method
     }
 }
+
+declare var arep: AutoRouteExpressPromise.AutoRoute
 
 declare module "autoroute-express-promise" {
     export = arep

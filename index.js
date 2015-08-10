@@ -1,5 +1,6 @@
 /// <reference path="typings/typings.d.ts" />
 var autoroute_base_1 = require('autoroute-base');
+var route_methods_1 = require('route-methods');
 var _ = require('lodash');
 var toControllers = _.curry(function (_a, controllerMethod) {
     var message = _a.message, baseRoute = _a.baseRoute, response = _a.response, routeName = _a.routeName;
@@ -13,6 +14,7 @@ var toControllers = _.curry(function (_a, controllerMethod) {
     });
 });
 var createRoutes = _.curry(function (o, routeDefinitions) {
+    var flattenedRoutes = routeDefinitions.map(route_methods_1.flattenRoute);
     _.forEach(routeDefinitions, function (routeDef) {
         var route = routeDef.route, methods = routeDef.methods, startRoute = o.baseRoute(route), options_ = _.assign({}, o, { routeName: route, baseRoute: startRoute });
         _.forEach(methods, toControllers(options_)); // attach routes/methods to router
