@@ -14,8 +14,8 @@ var toControllers = _.curry(function (_a, controllerMethod) {
     });
 });
 var createRoutes = _.curry(function (o, routeDefinitions) {
-    var flattenedRoutes = routeDefinitions.map(route_methods_1.flattenRoute);
-    _.forEach(routeDefinitions, function (routeDef) {
+    var flattenedRoutes = _(routeDefinitions).map(route_methods_1.flattenRoute).flatten().value();
+    _.forEach(flattenedRoutes, function (routeDef) {
         var route = routeDef.route, methods = routeDef.methods, startRoute = o.baseRoute(route), options_ = _.assign({}, o, { routeName: route, baseRoute: startRoute });
         _.forEach(methods, toControllers(options_)); // attach routes/methods to router
     });

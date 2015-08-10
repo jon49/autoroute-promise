@@ -22,9 +22,9 @@ const toControllers = _.curry(({message, baseRoute, response, routeName}: AutoRo
 
 })
 
-const createRoutes = _.curry((o: AutoRouteExpressPromise.Options, routeDefinitions: AutoRouteExpressPromise.RouteDefinition[]) => {
-    const flattenedRoutes = routeDefinitions.map(flattenRoute)
-    _.forEach(routeDefinitions, routeDef => {
+const createRoutes = _.curry((o: AutoRouteExpressPromise.Options, routeDefinitions: any) => {
+    const flattenedRoutes: AutoRouteExpressPromise.RouteDefinition[] = <any> _(routeDefinitions).map(flattenRoute).flatten().value()
+    _.forEach(flattenedRoutes, routeDef => {
         const {route, methods} = routeDef,
               startRoute = o.baseRoute(route), // Get router
               options_: AutoRouteExpressPromise.ToControllersOptions = <any> _.assign({}, o, {routeName: route, baseRoute: startRoute})
