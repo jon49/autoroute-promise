@@ -78,7 +78,29 @@ var routes: AutoRouteExpressPromise.RouteDefinition = {
 export = routes
 ```
 
-Example with two routes:
+Cleaner nested route syntax (version 0.2):
+
+```js
+var routes = {
+    '/pets': {
+        _methods: [
+            [ method.post,      (req: Request) => getPet(req.body) ] ]
+        ':id': [
+            [ method.get,       (req: Request) => getPet(req.params[ID]) ],
+            [ method.delete,    (req: Request) => petDied(req.params[ID]) ] ]
+    },
+    '/cats': {
+        ':id': [
+            [ method.get,       (req: Request) => getCat(req.params[ID]) ] ]
+        '/hamsters': { // Overrides cats because of the forward slash at beginning
+            '/fish': [ // Overrides hamsters (hamsters bite)
+                [ method.get,   (req: Request) => getFish(req.params[ID])] ]
+        }
+    }
+}
+```
+
+Example with two routes (this is the old way, you can still do it this way.):
 
 ```js
 import {method} from 'autoroute-express-promise'
@@ -102,23 +124,6 @@ var routes: AutoRouteExpressPromise.RouteDefinition[] = [
 
 export = routes
 ```
-
-Cleaner nested route syntax (version 0.2+):
-
-```js
-var routes = {
-    '/pets': {
-        methods: [
-            [ method.post,          (req: Request) => getPet(req.body) ] ]
-        ':id': {
-            methods: [
-                [ method.get,       (req: Request) => getPet(req.params[ID]) ],
-                [ method.delete,    (req: Request) => petDied(req.params[ID]) ] ]
-        }
-    }
-}
-```
-
 ## API
 
 ```js

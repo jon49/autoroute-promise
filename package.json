@@ -1,6 +1,6 @@
 {
   "name": "autoroute-express-promise",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "autoroute for use with promises",
   "main": "index.js",
   "scripts": {
